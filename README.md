@@ -1,2 +1,2 @@
 # loginpage
-I made an advance login &amp; sign up  webpagge with modern and attractive UI using HTML,CSS and JAVASCRIPT. 
+A sleek and responsive Login & Signup web application built using HTML, CSS, and JavaScript, designed with a modern UI and smooth animations. This project focuses on clean user experience, secure form handling, and seamless navigation.
