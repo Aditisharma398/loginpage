@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Modern Auth UI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
+
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+/* ================= VIDEO BACKGROUND ================= */
+.bg-video{
+  display:none;
+}
+
+
+/* Soft overlay */
+.overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(6px);
+
+
+  backdrop-filter:blur(2px);
+  z-index:1;
+}
+
+/* ================= PAGE CONTENT ================= */
+.page{
+  position:relative;
+  z-index:2;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ================= CARD ================= */
+.card{
+  width:360px;
+  padding:35px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.78);
+  backdrop-filter:blur(16px);
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
+}
+
+h2{text-align:center;margin-bottom:20px}
+
+input{
+  width:100%;
+  padding:12px;
+  margin-bottom:12px;
+  border-radius:10px;
+  border:1px solid #ddd;
+  outline:none;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:10px;
+  background:#000;
+  color:#fff;
+  font-size:15px;
+  cursor:pointer;
+}
+button:hover{background:#333}
+
+.toggle{
+  text-align:center;
+  margin-top:15px;
+  font-size:14px;
+}
+.toggle span{
+  cursor:pointer;
+  font-weight:500;
+}
+
+.msg{
+  text-align:center;
+  margin-top:10px;
+  font-size:14px;
+}
+
+.hide{display:none}
+body{
+  background:
+    radial-gradient(700px 350px at 15% 20%, rgba(124,58,237,0.28), transparent 60%),
+    radial-gradient(600px 300px at 85% 25%, rgba(34,211,238,0.28), transparent 60%),
+    radial-gradient(600px 300px at 50% 85%, rgba(236,72,153,0.25), transparent 60%),
+    linear-gradient(135deg, #0f172a, #020617);
+}
+/* ===== BACKGROUND BRAND TEXT (HORIZONTAL) ===== */
+body::before{
+  content:"NexusPromote";
+  position:fixed;
+  left:50%;
+  top:55%;
+  transform:translate(-50%, -50%);
+  font-size:96px;
+  font-weight:600;
+  letter-spacing:3px;
+  color:rgba(255,255,255,0.12);
+  z-index:0;
+  pointer-events:none;
+  white-space:nowrap;
+  text-shadow:
+    0 0 30px rgba(255,255,255,0.25);
+}
+
+/* ===== FADE ANIMATION ===== */
+.fade-out {
+  animation: fadeOut 0.35s ease forwards;
+}
+
+.fade-in {
+  animation: fadeIn 0.35s ease forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+/* ===== SLIDE ANIMATION ===== */
+.slide-out-left {
+  animation: slideOutLeft 0.4s ease forwards;
+}
+
+.slide-out-right {
+  animation: slideOutRight 0.4s ease forwards;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.4s ease forwards;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.4s ease forwards;
+}
+
+@keyframes slideOutLeft {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+
+
+</style>
+</head>
+
+<body>
+
+<!-- 🎥 VIDEO BACKGROUND -->
+<video class="bg-video" autoplay muted loop playsinline>
+  <source src="2759484-uhd_3840_2160_30fps.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<!-- 🔐 CONTENT -->
+<div class="page">
+  <div class="card">
+    <h2 id="title">Login</h2>
+
+    <form id="form">
+      <input id="loginField" placeholder="Username / Email / Contact No">
+
+      <input id="username" class="hide" placeholder="Username">
+      <input id="email" class="hide" placeholder="Email">
+      <input id="contact" class="hide" placeholder="Contact No">
+      <input id="whatsapp" class="hide" placeholder="WhatsApp No">
+      <input id="pan" class="hide" placeholder="PAN No">
+
+      <input id="password" type="password" placeholder="Password" required>
+
+      <button type="submit">Login</button>
+    </form>
+
+    <div class="toggle">
+  New here? <span id="toggleText">Sign Up</span>
+</div>
+
+
+    <div class="msg" id="msg"></div>
+  </div>
+</div>
+
+<script>
+let isLogin = true;
+const title = document.getElementById("title");
+const btn = document.querySelector("button");
+const msg = document.getElementById("msg");
+const toggleText = document.getElementById("toggleText");
+
+const loginField = document.getElementById("loginField");
+const fields = ["username","email","contact","whatsapp","pan"]
+  .map(id => document.getElementById(id));
+
+const card = document.querySelector(".card");
+
+toggleText.onclick = () => {
+  const outClass = isLogin ? "slide-out-left" : "slide-out-right";
+  const inClass  = isLogin ? "slide-in-right" : "slide-in-left";
+
+  card.classList.remove("slide-in-left", "slide-in-right");
+  card.classList.add(outClass);
+
+  setTimeout(() => {
+    isLogin = !isLogin;
+
+    title.innerText = isLogin ? "Login" : "Register";
+    btn.innerText = isLogin ? "Login" : "Register";
+    toggleText.innerText = isLogin ? "Sign Up" : "Login";
+
+    loginField.classList.toggle("hide", !isLogin);
+    fields.forEach(f => f.classList.toggle("hide", isLogin));
+    msg.innerText = "";
+
+    card.classList.remove(outClass);
+    card.classList.add(inClass);
+  }, 350);
+};
+
+function isValidPhone(number) {
+  return /^\d{10}$/.test(number);
+}
+["contact", "whatsapp"].forEach(id => {
+  document.getElementById(id).addEventListener("input", e => {
+    e.target.value = e.target.value.replace(/\D/g, "").slice(0, 10);
+  });
+});
+function isValidPhone(number) {
+  return /^\d{10}$/.test(number);
+}
+
+function isValidEmail(email) {
+  return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
+}
+
+function isValidPAN(pan) {
+  return /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/.test(pan);
+}
+
+function isStrongPassword(password) {
+  return /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/.test(password);
+}
+
+
+
+document.getElementById("form").onsubmit = e => {
+  e.preventDefault();
+  const password = document.getElementById("password").value;
+
+  if (!isLogin) {
+  if (!isValidPhone(contact.value)) {
+  msg.innerText = "Contact number must be exactly 10 digits";
+  msg.style.color = "red";
+  return;
+}
+
+if (!isValidPhone(whatsapp.value)) {
+  msg.innerText = "WhatsApp number must be exactly 10 digits";
+  msg.style.color = "red";
+  return;
+}
+
+if (!isValidEmail(email.value)) {
+  msg.innerText = "Please enter a valid email address";
+  msg.style.color = "red";
+  return;
+}
+
+if (!isValidPAN(pan.value)) {
+  msg.innerText = "PAN must be in format ABCDE1234F";
+  msg.style.color = "red";
+  return;
+}
+
+if (!isStrongPassword(password)) {
+  msg.innerText =
+    "Password must be 8+ chars with uppercase, lowercase, number & special character";
+  msg.style.color = "red";
+  return;
+}
+
+    // ✅ Registration logic
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = {
+      username: username.value,
+      email: email.value,
+      contact: contact.value,
+      whatsapp: whatsapp.value,
+      pan: pan.value,
+      password
+      
+    };
+        if (!isValidPhone(contact.value)) {
+      msg.innerText = "Contact number must be exactly 10 digits";
+      msg.style.color = "red";
+      return;
+    }
+
+    if (!isValidPhone(whatsapp.value)) {
+      msg.innerText = "WhatsApp number must be exactly 10 digits";
+      msg.style.color = "red";
+      return;
+    }
+
+
+    if (users.some(u =>
+      u.username === user.username ||
+      u.email === user.email ||
+      u.contact === user.contact
+    )) {
+      msg.innerText = "User already exists";
+      msg.style.color = "red";
+      return;
+    }
+
+    users.push(user);
+    localStorage.setItem("users", JSON.stringify(users));
+    msg.innerText = "Registration successful!";
+    msg.style.color = "green";
+    e.target.reset();
+
+  } else {
+    // ✅ Login logic using registered users
+    const value = loginField.value;
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    const matchedUser = users.find(user =>
+      (user.username === value ||
+       user.email === value ||
+       user.contact === value) &&
+       user.password === password
+    );
+
+    if (matchedUser) {
+      msg.innerText = "Login successful!";
+      msg.style.color = "green";
+      localStorage.setItem("currentUser", JSON.stringify(matchedUser));
+
+      setTimeout(() => {
+        window.location.href = "dashboard.html";
+      }, 500);
+    } else {
+      msg.innerText = "Invalid credentials";
+      msg.style.color = "red";
+    }
+  }
+};
+</script>
+
+</body>
+</html>

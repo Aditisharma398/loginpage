@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Poppins;
+}
+
+html,body{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+}
+
+/* VIDEO BACKGROUND */
+.bg-video{
+  display:none;
+}
+
+
+.overlay{
+  position:fixed;
+  inset:0;
+
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(6px);
+
+  backdrop-filter:blur(3px);
+  z-index:1;
+}
+
+/* LAYOUT */
+.dashboard{
+  position:relative;
+  z-index:2;
+  display:grid;
+  grid-template-columns:260px 1fr;
+  height:100%;
+}
+
+/* SIDEBAR */
+.sidebar{
+  padding:25px;
+  background:rgba(255,255,255,0.75);
+  backdrop-filter:blur(16px);
+  border-right:1px solid rgba(0,0,0,.08);
+}
+
+.sidebar h2{
+  margin-bottom:30px;
+  font-size:22px;
+}
+
+.sidebar ul{
+  list-style:none;
+}
+
+.sidebar li{
+  padding:12px 15px;
+  border-radius:12px;
+  margin-bottom:12px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.sidebar li:hover,
+.sidebar li.active{
+  background:#000;
+  color:#fff;
+}
+
+/* MAIN */
+.main{
+  padding:30px;
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:30px;
+}
+
+.header h1{
+  font-size:24px;
+}
+
+.header span{
+  font-size:14px;
+  opacity:.7;
+}
+
+/* CARDS */
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
+
+.card{
+  padding:25px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.78);
+  backdrop-filter:blur(16px);
+  box-shadow:0 20px 50px rgba(0,0,0,.25);
+  animation:fadeUp .5s ease;
+}
+
+.card h3{
+  font-size:16px;
+  font-weight:500;
+}
+
+.card span{
+  display:block;
+  margin-top:10px;
+  font-size:28px;
+  font-weight:600;
+}
+
+.section{
+  display:none;
+}
+
+.section.active{
+  display:block;
+}
+
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+ body{
+  background:
+    radial-gradient(800px 400px at 10% 10%, rgba(124,58,237,0.25), transparent 60%),
+    radial-gradient(700px 350px at 90% 20%, rgba(34,211,238,0.25), transparent 60%),
+    radial-gradient(600px 300px at 50% 90%, rgba(236,72,153,0.22), transparent 60%),
+    linear-gradient(135deg, #0f172a, #020617);
+}
+
+</style>
+</head>
+
+<body>
+
+ 
+
+<video class="bg-video" autoplay muted loop playsinline>
+  <source src="2759484-uhd_3840_2160_30fps.mp4" type="video/mp4">
+</video>
+
+<div class="overlay"></div>
+
+<div class="dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h2>Admin Panel</h2>
+    <ul>
+      <li class="active" data-section="dashboard">Dashboard</li>
+      <li data-section="orders">Orders</li>
+      <li data-section="products">Products</li>
+      <li data-section="customers">Customers</li>
+      <li data-section="analytics">Analytics</li>
+      <li data-section="settings">Settings</li>
+    </ul>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- DASHBOARD -->
+    <section class="section active" id="dashboard">
+      <div class="header">
+        <h1>Welcome, Aditi 👋</h1>
+        <span>E-Commerce Admin Panel</span>
+      </div>
+
+      <div class="cards">
+        <div class="card"><h3>Total Sales</h3><span>₹1,28,900</span></div>
+        <div class="card"><h3>Orders</h3><span>342</span></div>
+        <div class="card"><h3>Customers</h3><span>1,120</span></div>
+        <div class="card"><h3>Products</h3><span>58</span></div>
+      </div>
+    </section>
+
+    <!-- ORDERS -->
+    <section class="section" id="orders">
+      <div class="header">
+        <h1>Orders</h1>
+        <span>Manage customer orders</span>
+      </div>
+      <div class="cards">
+        <div class="card"><h3>Pending</h3><span>24</span></div>
+        <div class="card"><h3>Delivered</h3><span>298</span></div>
+        <div class="card"><h3>Cancelled</h3><span>20</span></div>
+      </div>
+    </section>
+
+    <!-- PRODUCTS -->
+    <section class="section" id="products">
+      <div class="header">
+        <h1>Products</h1>
+        <span>Inventory overview</span>
+      </div>
+      <div class="cards">
+        <div class="card"><h3>Total Products</h3><span>58</span></div>
+        <div class="card"><h3>Out of Stock</h3><span>6</span></div>
+        <div class="card"><h3>Categories</h3><span>12</span></div>
+      </div>
+    </section>
+
+    <!-- CUSTOMERS -->
+    <section class="section" id="customers">
+      <div class="header">
+        <h1>Customers</h1>
+        <span>User engagement</span>
+      </div>
+      <div class="cards">
+        <div class="card"><h3>Total Users</h3><span>1,120</span></div>
+        <div class="card"><h3>New This Month</h3><span>86</span></div>
+        <div class="card"><h3>Returning</h3><span>72%</span></div>
+      </div>
+    </section>
+
+    <!-- ANALYTICS -->
+    <section class="section" id="analytics">
+      <div class="header">
+        <h1>Analytics</h1>
+        <span>Performance metrics</span>
+      </div>
+      <div class="cards">
+        <div class="card"><h3>Revenue Growth</h3><span>+18%</span></div>
+        <div class="card"><h3>Conversion Rate</h3><span>3.6%</span></div>
+        <div class="card"><h3>Bounce Rate</h3><span>41%</span></div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="section" id="settings">
+      <div class="header">
+        <h1>Settings</h1>
+        <span>System preferences</span>
+      </div>
+      <div class="cards">
+        <div class="card"><h3>Profile</h3><span>Edit</span></div>
+        <div class="card"><h3>Security</h3><span>Update</span></div>
+        <div class="card"><h3>Theme</h3><span>Light</span></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+const menuItems = document.querySelectorAll('.sidebar li');
+const sections = document.querySelectorAll('.section');
+
+menuItems.forEach(item => {
+  item.addEventListener('click', () => {
+    menuItems.forEach(i => i.classList.remove('active'));
+    sections.forEach(s => s.classList.remove('active'));
+
+    item.classList.add('active');
+    document.getElementById(item.dataset.section).classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
